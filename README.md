@@ -1,13 +1,21 @@
 # Apuntes_Septima-Semana
-Apuntes control de movimiento - Primer corte-Tercera Semana
+Apuntes control de movimiento - Segundo Corte - Séptima Semana
 
-# MOTORES, SENSORES Y DRIVERS
-En esta clase, se habló de los tipos de motores existente en la industria, las diferencias entre sí y las características partículares de cada uno. Adicionalmente como desde SimScape - Matlab podemos hacer una validación de modelo del motor con el que queramos trabajar, esto desde ciertos parametros que nos entregan los fabricantes. 
-Para controlar su operación, los drivers actúan como amplificadores, convirtiendo señales de control en señales de alta potencia para alimentar los motores. En la industria, es común el uso de PWM (modulación por ancho de pulso) como método eficiente de control.
-Además, los sistemas de motores requieren sensores para garantizar precisión en su operación. Dispositivos como encoders y resolvers permiten medir la posición, velocidad y dirección del movimiento, mientras que otros sensores, como los de efecto Hall o shunt, se emplean para medir corriente y, por ende, inferir el torque. En los servomecanismos, la combinación de sensores, controladores y drivers asegura un movimiento preciso y eficiente.
+# Control de Movimiento (Diseño de Transmisión)
 
-## 1. MOTORES
-Son dispositivso que convierten la energía eléctrica en energía mecánica a través de la interacción de campos magnéticos, esto mediante el paso de corriente eléctrica por un devanado, generando un campo magnético que induce el movimiento de un rotor. Se utilizan ampliamente en maquinaria industrial, electrodomésticos, vehículos eléctricos y sistemas automatizados, debido a su eficiencia, precisión y facilidad de control. 
+**Introducción al Diseño de Transmisión**
+
+El diseño de transmisión se encarga de transferir potencia y movimiento entre componentes mecánicos, utilizando elementos como engranajes, correas y cadenas. Su objetivo es garantizar eficiencia, durabilidad y seguridad en sistemas como vehículos, maquinaria y robótica. Un diseño adecuado optimiza el rendimiento, reduce el desgaste y mejora la eficiencia energética, combinando principios de cinemática, dinámica y resistencia de materiales.
+
+## 1. Requerimientos de diseño
+
+Para que el diseño en control de movimiento no tenga ningún inconveniente se requiere una excelente selección de un motor y la transmisión del sistema para que el movimiento sea llevado a cabo en la carga o una herramienta. Para este diseño se deben tener en cuenta los siguientes indicadores:
+
+* Garantizar que el torque del motor a su máxima velocidad sea suficiente para la aplicación, considerando un margen de seguridad.
+
+* Verificar que la relación de inercia entre el motor y la carga sea la adecuada para un desempeño óptimo.
+
+* Asegurar que el diseño cumpla con criterios adicionales como costo, precisión y tiempos de ciclo, según los requisitos del sistema.
 
 >🔑 *Motores DC:* Los motores DC o motores de corriente continua, son dispositivos electromecánicos capaces de convertir energía eléctrica en energía mecánica.
 >
