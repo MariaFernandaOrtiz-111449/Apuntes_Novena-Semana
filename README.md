@@ -17,46 +17,98 @@ Para que el diseño en control de movimiento no tenga ningún inconveniente se r
 
 * Asegurar que el diseño cumpla con criterios adicionales como costo, precisión y tiempos de ciclo, según los requisitos del sistema.
 
->🔑 *Motores DC:* Los motores DC o motores de corriente continua, son dispositivos electromecánicos capaces de convertir energía eléctrica en energía mecánica.
->
->🔑 *Motores AC Asíncrono:* También conocidos como motores de inducción, son motores que funcionan con corriente alterna (AC), pero al ser asíncronos la velocidad de rotación no es igual a la velocidad del campo magnéticos del estator. 
->
->🔑 *Motores AC Síncrono:* Son motores que funcionan con corriente alterna (AC), pero al ser asíncronos la velocidad de rotación es exactamente igual a la velocidad del campo magnéticos del estator, esto hace que no haya deslizamiento, osea que el rotor gira en síncronica con el campo magnético del estator.
->
->🔑 *Servomotores:* Se asocia a un sistemas que es capaz se seguir referencias, es decir que sigue cambios en determinado tiempo, estas referencias pueden llegar a ser de posición, velocidad o torque mediante un sistema de control.
+Existen diferentes tipos de problemas que nos enfrentamos al momento de diseñar en el cual se especifíca que es lo que se debe solucionar:
 
-### 1.1. Motores Corriente Continua
-Estos motores contienen las siguientes caracteristicas fisicas:
-* Estator: El devanado inductor genera el campo magnético de excitación. Está compuesto por una corona de material ferromagnético (culata) con polos en su interior, alrededor de los cuales se enrollan los devanados de excitación que crean el campo magnético al circular corriente.
-* Rotor: Está constituido por una pieza cilíndrica ranurada de material ferromagnético, donde se aloja el devanado inducido cerrado en las ranuras del rotor.
-* Colector de Delgas: Es un conjunto de láminas de cobre aisladas entre sí que giran con el rotor y están conectadas eléctricamente a las bobinas del devanado inducido, permitiendo su conexión al exterior.
+* Teniendo el Movimiento de carga deseado	se busca -> dimensionar la Transmisión y motor.
+
+* Teniendo el Motor y transmisión existentes	se busca -> dimensionar el Movimiento de carga resultante.
+
+* Teniendo el Motor existente, movimiento de carga deseado se busca -> dimensionar la Transmisión.
+
+* Teniendo el Movimiento de carga deseado, transmisión se busca-> dimensionar el Motor.
+
+## 2. Inercia y Torque Reflejado
+
+**Inercia Reflejada**: Es la inercia equivalente que el motor "siente" debido a la carga y los elementos de transmisión. Se calcula ajustando la inercia de la carga $J_{L}$ a la referencia del motor mediante la relación de transmisión (N):
+
+$J_{r}:J_{L}*N^{2}$
+
+Donde N es la relación que contempla la transmisión
+
+**Torque Reflejado:** Es el torque que el motor debe generar para mover la carga a través de la transmisión. Se obtiene transformando el torque de la carga $T_{L}$ a la referencia del motor:
+
+$$T_{r}:\frac{T_{L}}{N}$$
+
+## 3. Conceptos de Transmisión Engranajes
+
+La relación de engranajes determina cómo se transmite el movimiento y el torque entre engranajes de distintos tamaños en un sistema mecánico. Se define como la razón entre el número de dientes o los diámetros de los engranajes involucrados:
+
+$$N = \frac{Z_{conducido}}{Z_{conductor}} = \frac{D_{conducido}}{D_{conductor}}$$
+
+Donde:
+
+* 𝑍 es el número de dientes.
+
+* 𝐷 es el diámetro del engranaje.
+
+* N es la relación de transmisión.
+
+**Efectos de la Relación de Engranajes**
+
+*Reducción de velocidad (𝑁 > 1)*
+
+* El engranaje conducido es más grande que el conductor.
+
+* La velocidad angular disminuye, pero el torque aumenta.
+
+*Aumento de velocidad (𝑁 < 1)*
+
+* El engranaje conducido es más pequeño.
+
+* La velocidad angular aumenta, pero el torque disminuye.
+
+*Relación 1:1 (N=1)*
+
+* Ambos engranajes tienen el mismo tamaño.
+
+* No hay cambio en la velocidad ni en el torque.
+
+### 3.1. Eficiencia
+
+La eficiencia en el control de movimiento se refiere a la capacidad de un sistema para transformar la energía en movimiento preciso y efectivo, minimizando pérdidas y optimizando el desempeño.
+
+**Factores Clave en la Eficiencia**
+
+*Transmisión de Energía*
+
+* Usar mecanismos de transmisión eficientes, como engranajes de alta precisión o correas síncronas con baja fricción.
+
+* Minimizar pérdidas por rozamiento y holguras en acoplamientos mecánicos.
+
+*Control del Torque y la Velocidad*
+
+* Implementar controladores PID o algoritmos avanzados para ajustar dinámicamente el torque y la velocidad.
+
+* Asegurar una relación de inercia adecuada entre el motor y la carga para mejorar la respuesta del sistema.
+
+*Reducción de Pérdidas Energéticas*
+
+* Seleccionar motores y accionamientos con alta eficiencia.
+
+* Evitar sobrecargas y diseñar el sistema para operar dentro del rango óptimo de eficiencia del motor.
+
+*Optimización del Perfil de Movimiento*
+
+* Usar aceleraciones y desaceleraciones suaves para evitar picos de corriente y desgaste mecánico.
+
+* Aplicar técnicas como interpolación y control de trayectoria para mejorar la precisión y reducir vibraciones.
+
+*Selección de Sensores y Realimentación*
+
+* Implementar sensores de alta resolución para mejorar la precisión y estabilidad del control.
+
+* Utilizar sistemas de retroalimentación en tiempo real para corregir desviaciones y mejorar la eficiencia del sistema.
   
-En cuestiones industriales estos tipos de motores tienen varias aplicaciones, por lo que podemos resaltas las siguientes ventajas y desventajas:
-
-| **Ventajas**                                 | **Desventajas**                                                           |
-|----------------------------------------------|---------------------------------------------------------------------------|
-| • Control más simple                         | • Requiere mantenimiento e inspección periódicas                          |
-| • Driver de potencia más simple              | • No se usa en entornos limpios debido a la abrasión de las escobillas    |
-| • Bajo precio en bajas capacidades           | • No se puede utilizar para altos torques                                 |
-| • Alta eficiencia en aplicaciones pequeñas   | • Sus imanes pueden sufrir desmagnetización con el tiempo                 |
-
-Tabla 1. Motores DC
-
-### 1.2. Motores Corriente Alterna - Asíncronos
-El motor funciona mediante un campo magnético giratorio generado en el devanado inductor del estator. Al atravesar el devanado del rotor, induce fuerzas electromagnéticas que generan corrientes, provocando una reacción que hace girar el motor a una velocidad inferior a la de sincronismo.
-  
-En cuestiones industriales estos tipos de motores tienen varias aplicaciones, por lo que podemos resaltas las siguientes ventajas y desventajas:
-
-| **Ventajas**                                 | **Desventajas**                                                           |
-|----------------------------------------------|---------------------------------------------------------------------------|
-| • Poco mantenimiento                         | • Baja eficiencia en aplicaciones pequeñas                                |
-| • Excelente resistencia al entorno           |  Control más complicado que el DC por las señales de potencia             |
-| • Alta velocidad y alto torque               | • Puede sufrir cambios en sus características debido a temperaturas       |
-| • Alta eficiencia en aplicaciones grandes    |                                                                           |
-| • Estructura robusta                         |                                                                           |
-
-Tabla 2. Motores AC Asíncronicos
-
 ### 1.3. Motores Corriente Alterna - Síncronos
 Son máquinas eléctricas cuya velocidad de rotación depende de la frecuencia de la red AC, manteniendo igual velocidad entre el rotor y el campo magnético del estator. Los imanes de campo se montan en el rotor y se excitan con corriente continua, mientras que las bobinas de armadura, divididas en tres partes, se alimentan con corriente trifásica. Estos motores contienen las siguientes caracteristicas fisicas:
 * Estator:  Bobinado trifásico para producir el campo magnético giratorio.
