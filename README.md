@@ -1,4 +1,4 @@
-# Apuntes_Septima-Semana
+# Apuntes_Novena Semana
 Apuntes control de movimiento - Segundo Corte - Séptima Semana
 
 # Control de Movimiento (Diseño de Transmisión)
