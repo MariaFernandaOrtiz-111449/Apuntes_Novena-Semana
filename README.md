@@ -109,105 +109,111 @@ La eficiencia en el control de movimiento se refiere a la capacidad de un sistem
 
 * Utilizar sistemas de retroalimentación en tiempo real para corregir desviaciones y mejorar la eficiencia del sistema.
   
-### 1.3. Motores Corriente Alterna - Síncronos
-Son máquinas eléctricas cuya velocidad de rotación depende de la frecuencia de la red AC, manteniendo igual velocidad entre el rotor y el campo magnético del estator. Los imanes de campo se montan en el rotor y se excitan con corriente continua, mientras que las bobinas de armadura, divididas en tres partes, se alimentan con corriente trifásica. Estos motores contienen las siguientes caracteristicas fisicas:
-* Estator:  Bobinado trifásico para producir el campo magnético giratorio.
-* Rotor: Tiene unos imanes o bobinas de excitación recorridas por una corriente continua. Gira a la velocidad del campo magnético.
-* Anillos Rozantes: Son anillos metálicos que sirven para alimentar de corriente continua al rotor.
+### 3.2. Inercia Total
 
-Se debe tener en cuenta que para iniciar el motor síncronico se debe aplica una señal alterna trifásica al estator y una señal DC al rotor, generando un campo magnético con polaridad. El campo del estator atrae al del rotor, provocando su giro a velocidad de sincronismo.
+Es la suma de todas las inercias reflejadas al eje del motor. Incluye la inercia del propio motor, la inercia de la carga y la de los elementos de transmisión, ajustadas según la relación de transmisión. Se expresa mediante la fórmula general:
+
+$$J{total} = J{motor} + J{transmisión} + J{carga} {reflejada}$$
+
+Donde:
+
+* $J{motor}$: Es la inercia del rotor del motor.
+
+* $J{transmision}$: Es la inercia de engranajes, poleas, correas, etc.
+
+*$J{carga reflejada}$: ​Es la inercia de la carga ajustada a la referencia del motor, calculada como:
+
+$$J{carga}{reflejada} : J{carga} * N^{2}$$
+
+Donde N está dado por la relación de transmisión.
+
+$N: \frac{W_{motor}}{W_{carga}}$
+
+**Importancia del Cálculo de la Inercia Total**
+* *Afecta la respuesta dinámica: Una inercia elevada requiere mayor torque para acelerar y desacelerar.*
+* *Influye en la selección del motor: Un desbalance entre la inercia del motor y la carga puede afectar la estabilidad y eficiencia del sistema.*
+* *Optimiza el control de movimiento: Una inercia total bien calculada permite un control más preciso y eficiente del sistema.*
   
-En cuestiones industriales estos tipos de motores tienen varias aplicaciones, por lo que podemos resaltas las siguientes ventajas y desventajas:
+### 3.3. Relación de Inercia
 
-| **Ventajas**                                     | **Desventajas**                                                           |
-|--------------------------------------------------|---------------------------------------------------------------------------|
-| • Muy poco mantenimiento                         | • Control de dificultad intermedia                                        |
-| • Excelente resistencia al entorno               | • Se requiere respuesta 1:1 entre driver motor                            |
-| • Compactos y ligeros                            | • Sus imanes pueden sufrir desmagnetización con el tiempo                 |
-| • Alta eficiencia en todo tipo de aplicaciones   |                                                                           |
+Es un parámetro clave en el diseño de sistemas de control de movimiento, ya que indica el equilibrio dinámico entre el motor y la carga. Se define como la razón entre la inercia reflejada de la carga y la inercia del rotor del motor
 
-Tabla 3. Motores AC Síncronicos
+Relación de Inercia: $$\frac{J{carga} {reflejada}}{J_{motor}}$$
 
-### 1.4. Servomotores
-**Modelo por corriente de armadura**
-* Parte Eléctrica: $\upsilon a= La*Ia + Ra*Ia + Vb$
-* Parte Magnética: $Tm = ( Ka*Kc*Ic )*Ia( t ) = K\tau *Ia( t )$  $Vb = Ke* \omega$  $Tm = Tc + Tp$
-* Parte Mecánica: $J*\frac{\partial^2 \theta }{\partial t^2  } + b*\frac{\mathrm{d} \theta }{\mathrm{d} t} + R\theta = \tau ( t )$
-$La * \frac{\mathrm{d} ( \frac{J \theta   + b\theta  + K\theta }{K\tau } )}{\mathrm{d} t} + Ra * ( \frac{J \theta   + b\theta  + K\theta }{K\tau } ) + Ke \theta  = \upsilon a$
+**Donde:**
+* $J{carga} {reflejada}: J_{carga} * N^{2}$ (si hay una transmisión con relación N)
+* $J_{motor}$ es la inercia del motor
 
-## 2. SENSORES
+**Práctica de la relación de Inercia**
+
+En la práctica, la relación de inercia entre la carga y el motor es un aspecto clave para lograr un sistema de movimiento eficiente y confiable. Esta relación influye directamente en el comportamiento dinámico del sistema, así como en la selección del motor y la transmisión. Dependiendo del tipo de aplicación y sus exigencias, se pueden presentar distintos escenarios que vale la pena considerar:
+
+* *Relación de inercia baja (rango de 1 a 2)*: Es adecuada para aplicaciones que requieren movimientos rápidos, con frecuentes arranques y paradas. No obstante, puede implicar el uso de un motor sobredimensionado, lo cual aumenta los costos y reduce la eficiencia energética.
+
+* *Relación de inercia alta (mayor a 10):* Se emplea en situaciones donde no se necesita una alta dinámica, como en movimientos lentos o constantes. Aunque puede reducir el tamaño del motor, también conlleva riesgos como una baja eficiencia del sistema o torque insuficiente para cumplir con la tarea.
+
+Por ello, elegir correctamente la relación de inercia según la aplicación es esencial para optimizar el rendimiento y evitar problemas en el diseño de sistemas de control de movimiento.
 Un sensores un dispositivo que detecta cambios en una magnitud física o química, como temperatura, presión o luz, y los convierte en señales eléctricas para su procesamiento. Se usa en diversos sistemas para monitoreo y automatización.
 
->🔑 *Encoder:* Un encoder es un sensor que convierte el movimiento (rotación o desplazamiento) en señales eléctricas para medir posición, velocidad o dirección en motores y sistemas automatizados.
->
->🔑 *Resolver:* Es un sensor electromecánico que mide la posición angular y la velocidad de un eje, utilizando señales eléctricas sin necesidad de componentes electrónicos en el rotor, lo que lo hace resistente y preciso. 
 
-Los servomecanismos utilizan sensores para medir corriente (torque), posición y velocidad, asegurando el cumplimiento de las rutinas de movimiento necesarias para diversas aplicaciones. Sin estas mediciones, no se puede garantizar un control preciso.
-Se analizarán algunos tipos de sensores que existen, especialmente los encoder u otros sensores que nos permitan hacer mediciones de pulsos de un motor.
+## 4. Concepto Transmisión Polea-Correa
 
-### 2.1. Encoders
-Generalmente son usados para medir tanto la posición como la velocidad del eje de cualquier tipo de motor.
-* Encoders Absolutos: Tienen un Código digital de posición absoluta para una sola revolución y un contador de revoluciones.
-* Encoders Incrementales: Generan un número específico de pulsos por unidad de longitud de movimiento lineal.
+El sistema de transmisión por polea y correa es un mecanismo ampliamente utilizado para transferir movimiento y potencia entre dos ejes separados. Este tipo de transmisión se basa en el uso de una correa flexible que conecta dos poleas: una motriz (conectada al motor) y otra conducida (conectada a la carga). Al girar la polea motriz, la correa transmite ese movimiento a la polea conducida, permitiendo modificar la velocidad y el torque de salida según el diámetro de las poleas involucradas.
 
-Comparandos ambos tipos de encoders, tenemos que:
+Entre sus ventajas destacan la simplicidad mecánica, el bajo costo, el funcionamiento silencioso y la capacidad de absorber vibraciones. Además, permite transmisiones a distancia y cierta flexibilidad en la alineación de los ejes. Sin embargo, también presenta desventajas como el posible deslizamiento de la correa, la necesidad de mantenimiento periódico (ajuste de tensión y reemplazo de la correa) y una eficiencia menor comparada con sistemas más rígidos como engranajes.
 
-| **Elemento**              | **Encoder Incremental**                 |  **Encoder Absoluto**                                                     |
-|---------------------------|-----------------------------------------|---------------------------------------------------------------------------|
-| Salida                    | Salida aumenta incrementalmente         | Hay posiciones absolutas en una revolución                                |
-| Reinicialización          | Operación de retorno durante encendido  | No require ninguna operación de retorno ya que se sabe siempre su posición dentro de una revolución   |
-| Precio                    | Bajo                                    |Alto                                                                        |
-| Estructura                | ![](https://github.com/MariaFernandaOrtiz-111449/Apuntes---Tercera-Semana/blob/7c772e8d44d86a24e2e5148ac6cf6bbda825b5d9/Encoder%20incremental.png)  |  ![](https://github.com/MariaFernandaOrtiz-111449/Apuntes---Tercera-Semana/blob/b67c06e9965e10d66c7d25e072653e2fdb2df51d/Encoder%20Absoluto.png)            |
-|Adicionales                |  Solamente se detectan pulsos           | Hay un Código perforado en el encoder. El mas usado es gray                |
+**Puntos claves:**
 
-Tabla 4. MEncoders
+* *Relación de transmisión:* Se determina por el cociente entre los diámetros de las poleas. Esto permite adaptar la velocidad y el torque entre el motor y la carga.
 
-### 2.2. Resolver
-Un resolver es un sensor analógico de posición angular con un rotor y un estator embobinados. Su funcionamiento es similar al de un transformador, donde la amplitud inducida en el rotor varía según la posición relativa. Existen modelos con y sin escobillas.
-* **Voltajes del resolver**: entre 2V RMS y 40V RMS.  
-* **Frecuencia de operación**: 50 Hz a 20 kHz.  
-* **Relación de transformación**: 0.2 V/V a 1 V/V.
+* *Tensión adecuada:* Es fundamental mantener la correa con la tensión correcta para evitar deslizamientos y asegurar una transmisión eficiente y duradera.
 
-### 2.3. Medición de Torque
-torque se infiere a partir de la corriente, debido a su relación aproximadamente lineal.   
-* **Shunt**: Usa una pequeña resistencia para medir voltaje y aplicar la ley de Ohm.  
-* **Efecto Hall**: Detecta cambios en el campo magnético y, por la ley de Faraday, permite obtener la corriente.
+### 4.1. Relación de Transmisión
 
-## 3. DRIVERS DE POTENCIA
-Un driver es un amplificador que convierte señales de control de baja potencia en señales de alta potencia (voltaje y/o corriente) para alimentar actuadores como motores, por lo que también se le conoce como amplificador. Cada eje requiere su propio driver y controlador. En los servomotores modernos, el controlador gestiona la retroalimentación de posición y velocidad, mientras que el driver maneja la retroalimentación de corriente.
-El manejo del driver se realiza mediante PWM (modulación por ancho de pulso), el estándar industrial para motores DC y AC, debido a su alta eficiencia. Algunos de los ejemplos de drivers de potencia que se pueden encontrar en el mercado, y que son bastante usados son:
+La relación de transmisión en un sistema de polea-correa indica cómo se modifica la velocidad de rotación entre la polea motriz (la que transmite el movimiento) y la polea conducida (la que recibe el movimiento). Esta relación depende directamente del tamaño de las poleas, y se calcula como:
 
-* Puente H
-* L293 y L298 (AN240/1288)
+Relación de transmisión (i) = $$\frac {Diámetro de la polea conducida}{Diámetro de la polea motriz}$$
 
-## 4. Ejercicios
-**Validación de Modelo**
+Este valor también puede expresarse usando las velocidades de rotación:
 
-En primera medida se realiza un montaje de un motor deseado para la estimación de parámetros faltantes dentro del datasheet del mismo. Se obsera la entrada y salida del mismo mediante el osciloscopio. Todo este proceso se ralizará dentro de un espacio simulado para no desgastar los componentes físico y poder realizar las pruebas necesarias sin un alto gasto económico.
+$$i: \frac{Velocidad de la polea motriz}{Velocidad de la polea conducida}$$
 
- ![](https://github.com/MariaFernandaOrtiz-111449/Apuntes---Tercera-Semana/blob/d6e6914ec354cdf12eba0cc78fcfb4d78b20ab08/Montaje.jpg)
+### 4.2. Inercia Reflejada
 
-En segunda medida, se especifican los parámtros que tendrá nuestro motor, identificando con el nombre de una variable los datos restantes a calcular.
+En un sistema de polea-correa, la inercia reflejada se refiere a cómo la inercia de la carga (conectada a la polea conducida) se “ve” desde el motor (polea motriz), tomando en cuenta la relación de transmisión. Este concepto es clave en el diseño de sistemas de control de movimiento, ya que afecta directamente la respuesta dinámica del motor.
 
-![](https://github.com/MariaFernandaOrtiz-111449/Apuntes---Tercera-Semana/blob/19f1970097cd354a2adfe8c3de00d11f888ff097/parametros.jpg)
+La inercia reflejada $J_{ref}$ al eje del motor se obtiene mediante la siguiente fórmula:
 
-Además, se debe tener en cuenta un motor estándar para tomar en cuenta la respuesta de un motor a una entrada escalón. Una vez teniendo las 2 gráficas del sistema, tanto la del motor de referencia y nuetro motor seleccionado, se realiza un contraste de ambas respuestas.
-![](https://github.com/MariaFernandaOrtiz-111449/Apuntes---Tercera-Semana/blob/7f7f518c4866c9cb6369a220ca7803f549a9a937/Simulacion.jpg)
+$$J_{ref}: \frac{J_{carga}}{i^{2}}$$
 
-Por último, se realiza la estimación de parámetros de nuestro motor y con esto completar la información faltante del funcionamiento del motor seleccionado.
+Donde:
+* $J_{carga}$ es la inercia real de la carga.
+* 𝑖
+i es la relación de transmisión (diámetro polea conducida / diámetro polea motriz).
 
-![](https://github.com/MariaFernandaOrtiz-111449/Apuntes---Tercera-Semana/blob/aa328692bd5aad8d0854940948ad1e2ec0514aa9/estimaci%C3%B3n.jpg)
+### 4.3. Torque de Carga
 
-En la siguiente imagen podemos observar la respuesta del motoro con la estimación de parámtros faltantes; se observa un seguimiento a la referencia de la entrada con la que se alimenta al motor. 
+El torque de carga en un sistema de transmisión por polea-correa es el torque que debe entregar el motor para mover la carga conectada a la polea conducida. Este torque depende de la relación de transmisión, el tipo de carga y la eficiencia del sistema.
 
-![](https://github.com/MariaFernandaOrtiz-111449/Apuntes---Tercera-Semana/blob/6272ebc703a4665d498ee1e5b2a2bb38e9ef1e22/datos%20iniciales.jpg)
+**Relación entre torque del motor y torque de la carga:**
+
+$$T{motor}: \frac{T_{carga}}{i*n}$$
+
+Donde:
+
+* $T{motor}$ es el torque que debe generar el motor
+* $T_{carga}$ es el torque requerido por la carga
+* $i$ es la relación de transmisión (diámetro polea conducida / diámetro polea motriz)
+* $n$ es la eficiencia del sistema (entre 0 y 1)
+
+## 5. Ejercicios
 
 ## 5. Conclusiones
-Los motores eléctricos, junto con los sensores y drivers, forman la base de innumerables aplicaciones industriales y tecnológicas. Su correcto funcionamiento depende de una integración efectiva de los diferentes componentes, desde la generación del movimiento hasta su regulación mediante señales de control y retroalimentación.
-El uso de tecnologías como PWM en los drivers y la incorporación de sensores de posición y corriente han permitido aumentar la eficiencia y precisión de los sistemas de automatización. Comprender estos conceptos es esencial para diseñar y optimizar motores en diversas aplicaciones, desde robótica hasta maquinaria industrial, garantizando un desempeño confiable y eficiente.
+
+* El diseño correcto de sistemas de transmisión mecánica (engranajes, correas, cadenas) es esencial para garantizar eficiencia, precisión, seguridad y durabilidad en sistemas automatizados y mecatrónicos.
+* Una correcta elección del motor y su relación con la transmisión y la carga permite alcanzar un funcionamiento óptimo. Esto requiere asegurar el torque necesario, una relación de inercia adecuada y el cumplimiento de criterios como el costo, precisión y tiempos de ciclo.
+* La inercia y el torque reflejados al eje del motor deben calcularse para anticipar el esfuerzo que el motor debe realizar. Esto es vital para evitar sobrecargas, mejorar el rendimiento dinámico y permitir un control más preciso.
+* La relación entre engranajes afecta directamente la velocidad y el torque transmitido. Además, mantener alta eficiencia en el sistema minimiza pérdidas energéticas, mejora la vida útil del equipo y reduce el consumo energético.
+* La relación define el equilibrio entre la inercia de la carga y la del motor. Mantenerla en rangos adecuados asegura un control estable y eficiente. Una mala relación puede llevar a inestabilidad, sobreesfuerzo del motor o pérdida de precisión.
 
 ## 6. Referencias
-* CHAPMAN. 2005. Maquinas eléctricas. Madrid: McGraw-Hill Interamericana
-* LANGSDORF. 1968. Principios de las maquinas de corriente continua. McGrawHill
-* SERRANO IRIBARNEGARAY. 1989: Fundamentos de maquinas eléctricas rotativas. Marcombo.
-* https://www.swe.siemens.com/spain/web/es/industry/drive_tech/variadores /Pages/Variadores.aspx
