@@ -208,7 +208,57 @@ Donde:
 
 ## 5. Ejercicios
 
-## 5. Conclusiones
+### Una carga tiene una inercia de 0.05 kg·m² y se conecta a un motor a través de una relación de transmisión de 4:1.
+* Calcula la inercia reflejada al motor.
+
+$$J_{r}=\frac{J_{L}}{N^{2}}$$
+
+$J_{r}=\frac{0.05}{4^{2}}$
+
+$J_{r}=\frac{0.05}{16}$
+
+$J_{r}=0.003125 Kg*m^{2}$
+
+* Si el torque requerido por la carga es de 2 Nm, ¿cuánto torque reflejado sentirá el motor?
+
+$$T_{r}= \frac{T_{L}}{N}$$
+
+$T_{r}=\frac{2}{4}$
+
+$T_{r}=0.5 Nm$
+
+
+### Un motor eléctrico proporciona un torque constante de 3 Nm a una velocidad de 1500 rpm.
+
+* Calcular la potencia mecánica entregada por el motor en watts.
+
+$$P=T*\omega$$
+
+$T=3 Nm$
+
+$\omega = 2\pi * \frac{rpm}{60}$
+
+$\omega=2\pi* \frac{1500}{60}$
+
+$\omega=2\pi * 25$
+
+$\omega = 157.08 rad/s$
+
+$P=3*157,08$
+
+$P=471,24 W$
+
+### Un sistema de transmisión tiene una eficiencia del 85%. Si el motor entrega una potencia de 500 W:
+
+*  Calcular la potencia útil disponible en la carga.
+
+$$P_{util}=\eta*P_{entrada}$$
+
+$P_{util}=0.85*500$
+
+$P_{util}= 425 W$
+
+## 6. Conclusiones
 
 * El diseño correcto de sistemas de transmisión mecánica (engranajes, correas, cadenas) es esencial para garantizar eficiencia, precisión, seguridad y durabilidad en sistemas automatizados y mecatrónicos.
 * Una correcta elección del motor y su relación con la transmisión y la carga permite alcanzar un funcionamiento óptimo. Esto requiere asegurar el torque necesario, una relación de inercia adecuada y el cumplimiento de criterios como el costo, precisión y tiempos de ciclo.
@@ -216,4 +266,12 @@ Donde:
 * La relación entre engranajes afecta directamente la velocidad y el torque transmitido. Además, mantener alta eficiencia en el sistema minimiza pérdidas energéticas, mejora la vida útil del equipo y reduce el consumo energético.
 * La relación define el equilibrio entre la inercia de la carga y la del motor. Mantenerla en rangos adecuados asegura un control estable y eficiente. Una mala relación puede llevar a inestabilidad, sobreesfuerzo del motor o pérdida de precisión.
 
-## 6. Referencias
+## 7. Referencias
+
+* Mecatrónica Integrada (2023). Motores eléctricos: Torque, potencia y eficiencia. Universidad Cooperativa de Colombia – Facultad de Ingeniería Mecatrónica. Material de estudio.
+
+* González, J. (2019). Principios de máquinas eléctricas y transformadores. McGraw-Hill.
+
+* Universidad Nacional de Colombia (2022). Laboratorio de máquinas eléctricas: prácticas con motores de inducción y corriente continua. Facultad de Ingeniería Eléctrica.
+
+* Universidad Cooperativa de Colombia – Facultad de Ingeniería Mecatrónica. (2023). Motores eléctricos: Torque, potencia y eficiencia. Material de estudio interno.
